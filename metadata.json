@@ -1,0 +1,8 @@
+{
+  "name": "VEILWATCH",
+  "description": "See Everything. Expose Nothing. Privacy-first intelligent infrastructure monitoring prototype.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

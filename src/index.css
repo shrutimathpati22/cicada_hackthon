@@ -1,0 +1,311 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+    /* Golden Yellow, Champagne & Soft Ivory / Cream Palette */
+    --vw-bg: #FFF9EF;
+    --vw-bg-cream: #FFF1D9;
+    --vw-surface: rgba(255, 255, 255, 0.78);
+    --vw-surface-solid: #FFFFFF;
+    --vw-surface-muted: rgba(255, 241, 217, 0.72);
+    --vw-text: #29231B;
+    --vw-text-muted: #6A5B47;
+    --vw-border: rgba(217, 154, 37, 0.24);
+    --vw-gold: #B87914;
+    --vw-champagne: #E8C36A;
+    --vw-golden: #F5C542;
+    --vw-amber: #D99A25;
+    --vw-gold-soft: rgba(245, 197, 66, 0.22);
+    --vw-amber-glow: rgba(245, 197, 66, 0.34);
+
+    /* Semantic Status Colors (High contrast on ivory/cream) */
+    --vw-ok: #15803D;
+    --vw-warn: #B45309;
+    --vw-crit: #BE123C;
+    --vw-accent-text: #8A5A10;
+  }
+
+  html.dark {
+    /* Optional Dark Obsidian + Champagne Gold mode if toggled in Settings */
+    --vw-bg: #17130D;
+    --vw-bg-cream: #221B11;
+    --vw-surface: rgba(34, 27, 17, 0.84);
+    --vw-surface-solid: #221B11;
+    --vw-surface-muted: rgba(48, 38, 23, 0.76);
+    --vw-text: #FFF9EF;
+    --vw-text-muted: #D5C6AE;
+    --vw-border: rgba(232, 195, 106, 0.22);
+    --vw-gold: #F5C542;
+    --vw-champagne: #E8C36A;
+    --vw-golden: #F5C542;
+    --vw-amber: #D99A25;
+    --vw-gold-soft: rgba(245, 197, 66, 0.16);
+    --vw-amber-glow: rgba(245, 197, 66, 0.26);
+
+    --vw-ok: #4ADE80;
+    --vw-warn: #F5C542;
+    --vw-crit: #FB7185;
+    --vw-accent-text: #E8C36A;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--vw-bg);
+    color: var(--vw-text);
+    transition: background-color 240ms ease, color 240ms ease;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Golden Heading Gradient */
+.vw-gradient-text {
+  background: linear-gradient(110deg, #8F5A0B 0%, #D99A25 45%, #B87914 75%, #E8C36A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+html.dark .vw-gradient-text {
+  background: linear-gradient(110deg, #FFF1D9 0%, #F5C542 48%, #E8C36A 80%, #D99A25 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Soft Champagne Border Rim */
+.vw-gradient-border {
+  position: relative;
+}
+
+.vw-gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(125deg, rgba(245, 197, 66, 0.72), rgba(232, 195, 106, 0.45), rgba(217, 154, 37, 0.68));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+/* Golden Yellow Gradient Buttons with Soft Glow */
+.vw-gradient-btn {
+  background: linear-gradient(115deg, #F5C542 0%, #E8C36A 50%, #D99A25 100%);
+  color: #29231B;
+  box-shadow:
+    0 6px 20px -6px rgba(217, 154, 37, 0.52),
+    0 0 0 1px rgba(217, 154, 37, 0.35),
+    inset 0 1px 0 rgba(255, 249, 239, 0.65);
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 200ms ease;
+}
+
+.vw-gradient-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+  box-shadow:
+    0 10px 28px -5px rgba(245, 197, 66, 0.65),
+    0 0 18px -2px rgba(245, 197, 66, 0.38),
+    0 0 0 1px rgba(217, 154, 37, 0.52),
+    inset 0 1px 0 rgba(255, 249, 239, 0.8);
+}
+
+.vw-gradient-btn:active {
+  transform: translateY(0);
+}
+
+/* Transparent White & Cream Glass Cards with Soft Golden Shadows & Hover Glow */
+.vw-glass-card {
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.84) 0%, rgba(255, 241, 217, 0.64) 100%);
+  border: 1px solid var(--vw-border);
+  backdrop-filter: blur(14px);
+  box-shadow:
+    0 10px 30px -14px rgba(217, 154, 37, 0.20),
+    0 4px 14px -6px rgba(41, 35, 27, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  transition: box-shadow 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 260ms ease,
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vw-glass-card:hover {
+  border-color: rgba(217, 154, 37, 0.42);
+  box-shadow:
+    0 14px 36px -12px rgba(245, 197, 66, 0.28),
+    0 0 24px -8px rgba(232, 195, 106, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+html.dark .vw-glass-card {
+  background: linear-gradient(155deg, rgba(38, 30, 19, 0.88) 0%, rgba(26, 20, 13, 0.92) 100%);
+  box-shadow:
+    0 12px 32px -14px rgba(0, 0, 0, 0.65),
+    0 0 18px -10px rgba(245, 197, 66, 0.16),
+    inset 0 1px 0 rgba(232, 195, 106, 0.12);
+}
+
+html.dark .vw-glass-card:hover {
+  border-color: rgba(245, 197, 66, 0.38);
+  box-shadow:
+    0 16px 36px -12px rgba(0, 0, 0, 0.72),
+    0 0 26px -8px rgba(245, 197, 66, 0.24),
+    inset 0 1px 0 rgba(232, 195, 106, 0.18);
+}
+
+.vw-gold-glow {
+  box-shadow:
+    0 14px 40px -12px rgba(217, 154, 37, 0.32),
+    0 0 28px -8px rgba(245, 197, 66, 0.28);
+}
+
+/* Animations: Golden Shield Halo, Particles, Waves, Card Loading, Page Transitions */
+@keyframes vw-shield-halo {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(245, 197, 66, 0.45));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(217, 154, 37, 0.75));
+    transform: scale(1.03);
+  }
+}
+
+.vw-shield-glow {
+  animation: vw-shield-halo 4.5s ease-in-out infinite;
+}
+
+@keyframes vw-particle-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate3d(14px, -22px, 0) scale(1.25);
+    opacity: 0.85;
+  }
+}
+
+@keyframes vw-wave-drift {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-24px, 8px, 0);
+  }
+}
+
+@keyframes vw-light-orb {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translate3d(20px, 14px, 0) scale(1.08);
+    opacity: 0.72;
+  }
+}
+
+@keyframes vw-card-fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.vw-page-enter {
+  animation: vw-card-fade-up 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.vw-page-enter section,
+.vw-page-enter article {
+  animation: vw-card-fade-up 340ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.vw-particle {
+  animation: vw-particle-float var(--dur, 9s) ease-in-out var(--delay, 0s) infinite;
+}
+
+.vw-wave-slow {
+  animation: vw-wave-drift 18s ease-in-out infinite;
+}
+
+.vw-wave-reverse {
+  animation: vw-wave-drift 24s ease-in-out reverse infinite;
+}
+
+.vw-orb-float {
+  animation: vw-light-orb 14s ease-in-out infinite;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom sleek golden scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(217, 154, 37, 0.32);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(217, 154, 37, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #29231B !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only-area {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .vw-glass-card {
+    background: #FFFFFF !important;
+    border: 1px solid #D9C49A !important;
+    box-shadow: none !important;
+    color: #29231B !important;
+  }
+}
